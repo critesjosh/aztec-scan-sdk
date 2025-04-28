@@ -1,11 +1,13 @@
 # Aztec Scan SDK
 
-This SDK provides utilities for interacting with the Aztec Scan API.
+This SDK provides utilities for interacting with the Aztec Scan API. Specifically for registering contract metadata. [Our full API documentation is available here](https://docs.aztecscan.xyz).
+
+## Features
 
 ✅ - Register contract artifacts
 ✅ - Verify contract deployments
 ✅ - Deployer contact information
-⚠️ - To be shown on [Aztec Scan's Ecosystem page](https://aztecscan.xyz/ecosystem). [Please create a PR to this file](https://github.com/aztec-scan/chicmoz/blob/main/services/explorer-api/src/constants.ts).
+⚠️ - To be shown on [Aztec Scan's Ecosystem page](https://aztecscan.xyz/ecosystem) you'll need to have AztecScanNotes registered. [Currently this is done by creating a PR to this file.](https://github.com/aztec-scan/chicmoz/blob/main/services/explorer-api/src/constants.ts).
 
 ## Installation
 
