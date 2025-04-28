@@ -1,16 +1,16 @@
 /* eslint-disable no-console */
 import { readFileSync } from "fs";
 import { join } from "path";
-import {
-  callExplorerApi,
-  generateVerifyInstancePayload,
-  generateVerifyInstanceUrl,
+import { 
+  callExplorerApi, 
+  generateVerifyInstanceUrl, 
+  generateVerifyInstancePayload 
 } from "../src/api-utils";
 import { config } from "../src/config";
-import {
-  ArtifactObject,
-  ContractDeployerMetadata,
-  VerifyInstanceArgs,
+import { 
+  ArtifactObject, 
+  VerifyInstanceArgs, 
+  ContractDeployerMetadata 
 } from "../src/types";
 
 // Load the token contract artifact directly from the known path
@@ -45,7 +45,7 @@ const EXAMPLE_CONSTRUCTOR_ARGS = [
 
 // Example public keys string
 const EXAMPLE_PUBLIC_KEYS_STRING =
-  "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef";
+  "0x117c12386e075ffacbda87aab144e3a5e54ea81a0acac393648503fdc40afb692feed50d678b9d4dc459c2e0144ce6765aaa0cd5d21618e41abe5450300edd6b0c6f602b23b9ab6c688446a53f74e7d75ce1c9d4828c82edcefdc1fb0422d4732f332e2ea2e57adbf290297f43ebaeb4f50ec2bf39b3424a0172bdec0b508434278cbb3b8810477d23aa7dc1d6266ddc222cb03e1526d34e071e2eac11339d630e333065c42d7321db5903c680fdcfbc784c5a6248336d24a1c3ae9bb97dbe660a3cf114852ba27eabf15d7069025ba0d4029b4cc7e5463090eb2a44615a03c805d3a58bead62678d234e9ffb9f2ae76b4c2491624d43d7702fb38c09e0f8138";
 
 // Example deployer address
 const EXAMPLE_DEPLOYER =
@@ -57,12 +57,14 @@ const EXAMPLE_SALT =
 
 // Example deployer metadata
 const EXAMPLE_DEPLOYER_METADATA: ContractDeployerMetadata = {
-  name: "Token Contract",
-  description: "Standard ERC20-compatible token implementation",
-  version: "1.0.0",
-  license: "Apache-2.0",
-  author: "Your Name",
-  repository: "https://github.com/your-username/your-repo",
+  contractIdentifier: "TokenContract",
+  details: "Standard Token Contract",
+  creatorName: "Obsidion",
+  creatorContact: "TBD",
+  appUrl: "https://obsidion.xyz",
+  repoUrl: "https://github.com/obsidionlabs",
+  reviewedAt: new Date().toISOString(),
+  contractType: null,
 };
 
 const verifyContractInstanceDeployment = async (
@@ -76,9 +78,10 @@ const verifyContractInstanceDeployment = async (
     contractInstanceAddress,
   );
 
+  // Use generateVerifyInstancePayload to create verifiedDeploymentArguments
   const payload = {
-    verifiedDeploymentArguments: generateVerifyInstancePayload(verifyArgs),
     deployerMetadata,
+    verifiedDeploymentArguments: generateVerifyInstancePayload(verifyArgs),
   };
 
   console.log(`Generated URL: ${url}`);
@@ -118,8 +121,9 @@ void (async (): Promise<void> => {
       contractLoggingName,
       contractInstanceAddress,
       verifyArgs,
-      EXAMPLE_DEPLOYER_METADATA,
+      EXAMPLE_DEPLOYER_METADATA
     );
+
     console.log("Verification completed successfully!");
   } catch (error) {
     console.error("Error during verification:", error);

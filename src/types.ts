@@ -1,45 +1,39 @@
-import { NoirCompiledContract } from "@aztec/aztec.js";
-
-/**
- * Duplicated types from @chicmoz-pkg/types
- */
-
-// Contract deployer metadata
 export interface ContractDeployerMetadata {
-  name: string;
-  description: string;
-  version: string;
-  license: string;
-  author: string;
-  repository: string;
-  [key: string]: string;
+  contractIdentifier: string;
+  details: string;
+  creatorName: string;
+  creatorContact: string;
+  appUrl: string;
+  repoUrl: string;
+  reviewedAt: string;
+  contractType: null | string;
 }
 
-// Represents artifact object type
-export type ArtifactObject =
-  | { default: NoirCompiledContract }
-  | NoirCompiledContract;
-
-// Arguments for verify instance payload
 export interface VerifyInstanceArgs {
   publicKeysString: string;
   deployer: string;
   salt: string;
   constructorArgs: string[];
-  artifactObj?: ArtifactObject;
+  artifactObj: ArtifactObject;
 }
 
-// HTTP Response type
-export interface HttpResponse {
-  statusCode: number | undefined;
-  statusMessage: string | undefined;
-  data: string;
+export interface ArtifactObject {
+  // Contract artifact properties
+  [key: string]: any;
 }
 
-// API Request options
+// Add missing interfaces for API utilities
 export interface ApiRequestOptions {
   urlStr: string;
   method: string;
   postData: string;
   loggingString: string;
 }
+
+export interface HttpResponse {
+  statusCode: number | undefined;
+  statusMessage: string | undefined;
+  data: string;
+}
+
+// Keep any other existing interfaces/types

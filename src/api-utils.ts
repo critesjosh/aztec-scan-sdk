@@ -128,7 +128,11 @@ export const generateVerifyInstanceUrl = (
  * @returns Payload for the API request
  */
 export const generateVerifyInstancePayload = (args: any): any => {
-  // In a real implementation, this would properly format the payload
-  // For now, we'll just return the args directly
-  return args;
+  return {
+    salt: args.salt,
+    deployer: args.deployer,
+    publicKeysString: args.publicKeysString,
+    constructorArgs: args.constructorArgs,
+    stringifiedArtifactJson: JSON.stringify(args.artifactObj),
+  };
 };
