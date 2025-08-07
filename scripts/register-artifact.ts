@@ -10,12 +10,12 @@ import { config } from "../src/config";
 import { ArtifactObject } from "../src/types";
 
 // Load the token contract artifact directly from the known path
-const tokenContractArtifactPath = join(
+const artifactPath = join(
   __dirname,
-  "../node_modules/@aztec/noir-contracts.js/artifacts/token_contract-Token.json",
+  "../easy_private_voting_contract-EasyPrivateVoting.json",
 );
-const tokenContractArtifactJson = JSON.parse(
-  readFileSync(tokenContractArtifactPath, "utf8"),
+const artifactJson = JSON.parse(
+  readFileSync(artifactPath, "utf8"),
 );
 
 // Parse command line arguments
@@ -29,7 +29,7 @@ if (!contractClassId) {
   process.exit(1);
 }
 
-const contractLoggingName = "Token Contract";
+const contractLoggingName = "Easy Private Voting Contract";
 
 const registerContractClassArtifact = async (
   contractLoggingName: string,
@@ -64,7 +64,7 @@ void (async (): Promise<void> => {
   try {
     await registerContractClassArtifact(
       contractLoggingName,
-      tokenContractArtifactJson as ArtifactObject,
+      artifactJson as ArtifactObject,
       contractClassId,
       version,
     );

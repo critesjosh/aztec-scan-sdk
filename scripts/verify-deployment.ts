@@ -1,25 +1,25 @@
 /* eslint-disable no-console */
 import { readFileSync } from "fs";
 import { join } from "path";
-import { 
-  callExplorerApi, 
-  generateVerifyInstanceUrl, 
-  generateVerifyInstancePayload 
+import {
+  callExplorerApi,
+  generateVerifyInstanceUrl,
+  generateVerifyInstancePayload
 } from "../src/api-utils";
 import { config } from "../src/config";
-import { 
-  ArtifactObject, 
-  VerifyInstanceArgs, 
-  ContractDeployerMetadata 
+import {
+  ArtifactObject,
+  VerifyInstanceArgs,
+  ContractDeployerMetadata
 } from "../src/types";
 
 // Load the token contract artifact directly from the known path
-const tokenContractArtifactPath = join(
+const artifactPath = join(
   __dirname,
-  "../node_modules/@aztec/noir-contracts.js/artifacts/token_contract-Token.json",
+  "../easy_private_voting_contract-EasyPrivateVoting.json",
 );
-const tokenContractArtifactJson = JSON.parse(
-  readFileSync(tokenContractArtifactPath, "utf8"),
+const artifactJson = JSON.parse(
+  readFileSync(artifactPath, "utf8"),
 );
 
 // Parse command line arguments
@@ -32,32 +32,28 @@ if (!contractInstanceAddress) {
   process.exit(1);
 }
 
-const contractLoggingName = "Token Contract";
+const contractLoggingName = "Easy Privte Voting Contract";
 
 // HARDCODED EXAMPLES
 // Example constructor arguments for a Token contract (must be strings)
 const EXAMPLE_CONSTRUCTOR_ARGS = [
-  "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef", // owner address
-  "TokenName", // token name
-  "TKN", // token symbol
-  "18", // decimals (as string)
+  "0x204a9adfa07d063792ce737d3164b86a016584d53cb2fede795d00659e1f94cc", // owner address
 ];
 
 // Example public keys string
-const EXAMPLE_PUBLIC_KEYS_STRING =
-  "0x117c12386e075ffacbda87aab144e3a5e54ea81a0acac393648503fdc40afb692feed50d678b9d4dc459c2e0144ce6765aaa0cd5d21618e41abe5450300edd6b0c6f602b23b9ab6c688446a53f74e7d75ce1c9d4828c82edcefdc1fb0422d4732f332e2ea2e57adbf290297f43ebaeb4f50ec2bf39b3424a0172bdec0b508434278cbb3b8810477d23aa7dc1d6266ddc222cb03e1526d34e071e2eac11339d630e333065c42d7321db5903c680fdcfbc784c5a6248336d24a1c3ae9bb97dbe660a3cf114852ba27eabf15d7069025ba0d4029b4cc7e5463090eb2a44615a03c805d3a58bead62678d234e9ffb9f2ae76b4c2491624d43d7702fb38c09e0f8138";
+const EXAMPLE_PUBLIC_KEYS_STRING = "";
 
 // Example deployer address
 const EXAMPLE_DEPLOYER =
-  "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890";
+  "0x204a9adfa07d063792ce737d3164b86a016584d53cb2fede795d00659e1f94cc";
 
 // Example salt value
 const EXAMPLE_SALT =
-  "0x0000000000000000000000000000000000000000000000000000000000000001";
+  "0x0d50e9616a92a7ad33e0a5075d6c2ce68ee488bc0910497f427135f25a552ba7";
 
 // Example deployer metadata
 const EXAMPLE_DEPLOYER_METADATA: ContractDeployerMetadata = {
-  contractIdentifier: "TokenContract",
+  contractIdentifier: "EasyPrivateVoting",
   details: "Standard Token Contract",
   creatorName: "Obsidion",
   creatorContact: "TBD",
@@ -114,7 +110,7 @@ void (async (): Promise<void> => {
       deployer: EXAMPLE_DEPLOYER,
       salt: EXAMPLE_SALT,
       constructorArgs: EXAMPLE_CONSTRUCTOR_ARGS,
-      artifactObj: tokenContractArtifactJson as ArtifactObject,
+      artifactObj: artifactJson as ArtifactObject,
     };
 
     await verifyContractInstanceDeployment(

@@ -1,0 +1,1 @@
+voting contract class id: 0x24c35483cbadb89d00c2db57bcada84651b4fca4a22a5273b0c97099063064a7
